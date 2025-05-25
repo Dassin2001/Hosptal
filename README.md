@@ -1,4 +1,4 @@
-# 🏥 Application de gestion des rendez-vous médicaux
+# Application de gestion des rendez-vous médicaux
 
 Cette application permet de gérer efficacement les **rendez-vous, consultations, patients et médecins** au sein d’un cabinet ou d’un établissement de santé.
 
@@ -8,7 +8,7 @@ Faciliter l’organisation des consultations médicales en automatisant la prise
 
 ---
 
-## 📦 Structure des entités
+## Structure des entités
 
 ### Médecin (`Medcin`)
 - Attributs : `nom`, `prénom`, `spécialité`
@@ -89,9 +89,9 @@ Les relations entre les entités sont modélisées à l’aide des annotations s
 @Temporal(TemporalType.DATE) : utilisée pour indiquer que les attributs de type Date doivent être enregistrés au format date (sans heure).
 
 L’utilisation de ces annotations permet à l’ORM (Object Relational Mapping) de gérer automatiquement les correspondances entre les objets Java et les tables de la base de données, tout en respectant les contraintes d’intégrité relationnelle.
----------
-Nous avons effectué les configurations nécessaires dans le fichier application.properties afin de définir les paramètres de l'application, notamment :
+####Configurer l'unité de persistance dans le ficher application.properties 
 
+Nous avons effectué les configurations nécessaires dans le fichier application.properties afin de définir les paramètres de l'application, notamment :
 le nom de l'application,
 l'activation de la console H2,
 le port d'exécution (8080),
@@ -104,3 +104,61 @@ L’image suivante illustre les tables générées à partir des entités Java :
 ![hospital](images/bDB.png)
 
 ![hospital](images/hospitaldb.png)
+
+
+
+#### Créer l'interface JPA Repository basée sur Spring data
+Nous avons créé une interface JPA Repository pour chaque entité (Patient, Médecin, RendezVous, Consultation) afin de faciliter les opérations de persistance.
+Ces interfaces héritent de JpaRepository, ce qui permet de bénéficier automatiquement de méthodes prêtes à l’emploi pour effectuer les opérations CRUD (Create, Read, Update, Delete) sans avoir à écrire de requêtes SQL manuelles.
+
+#### Tester quelques opérations de gestion de patients :
+Pour tester le bon fonctionnement de notre application, nous avons créé une méthode qui retourne un objet de type CommandLineRunner.
+Cette méthode permet d’exécuter automatiquement du code au démarrage de l’application Spring Boot. 
+Afin d'exécuter automatiquement une méthode au démarrage de l'application, nous avons utilisé l'annotation @Bean. Cela permet à Spring de reconnaître la méthode comme un composant à instancier et à injecter dans le contexte d'exécution. Ainsi, au lancement de l'application, Spring appelle automatiquement cette méthode et exécute son contenu.
+
+Dans notre cas, nous avons créé une méthode start() qui retourne un objet de type CommandLineRunner. Cette méthode est annotée avec @Bean, ce qui indique à Spring de l'exécuter au démarrage. Si nous souhaitons utiliser l'objet retourné ailleurs dans l'application, il suffit d’utiliser l’annotation @Autowired pour l’injecter automatiquement.
+
+  ###### Ajouter des patients et medcins
+
+![hospital](images/codedbadd.png)
+
+![hospital](images/dbpatient.png)       ![hospital](images/dbmedcin.png)
+
+
+###### Consulter tous les patients et tous les medcins
+
+
+```
+// Consulter tous les patients
+            System.out.println("onsulter tous les patients");
+            List<Patient> patients = patientRepository.findAll();
+            patients.forEach(p ->{
+                System.out.println("Patient : "+ p.getId() + " ==> " +p.getNom());
+            });
+            
+            // Consulter tous les Medcin
+            System.out.println("Consulter tous les Medcins");
+            List<Medcin> medcins = medcinRepository.findAll();
+            medcins.forEach(m ->{
+                System.out.println("Medcin : "+ m.getId() + " ==> " +m.getNom());
+            });
+```
+### gestion de patient
+
+Consulter un patient,Chercher des patients,Mettre à jour un patient,supprimer un patient
+
+### gestion de Medcin
+
+Consulter un Medcin,Chercher des Medcins,Mettre à jour un Medcin,supprimer un Medcin
+
+### gestion de Consultation
+
+Consulter un Consultation,Chercher des Consultations,Mettre à jour un Consultation,supprimer un Consultation
+
+### gestion de RendezVous
+
+Consulter un RendezVous,Chercher des RendezVouss,Mettre à jour un RendezVous,supprimer un RendezVous
+
+#### Migrer de H2 Database vers MySQL
+#### Conclusion 
+
