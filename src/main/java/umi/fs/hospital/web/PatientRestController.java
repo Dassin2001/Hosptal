@@ -1,4 +1,4 @@
-package umi.fs.hospital.entities.web;
+package umi.fs.hospital.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
