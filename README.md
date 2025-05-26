@@ -75,7 +75,6 @@ Nous avons créé le projet à l’aide de Spring Initializr, puis nous avons im
 ## Creation des entites 
 Dans le cadre du développement de l’application, nous avons conçu les différentes entités du modèle métier (Patient, Médecin, RendezVous, Consultation) en utilisant les annotations JPA (Jakarta Persistence API) nécessaires afin d’assurer leur persistance en base de données.
 
-![hospital](images/creationprj1.png)
 
 Chaque entité a été annotée avec @Entity pour indiquer qu’il s’agit d’une classe persistante. L’identifiant primaire de chaque entité est défini à l’aide de l’annotation @Id, tandis que @GeneratedValue(strategy = GenerationType.IDENTITY) permet la génération automatique des identifiants par la base de données.
 
@@ -146,17 +145,17 @@ Dans notre cas, nous avons créé une méthode start() qui retourne un objet de 
 ### gestion de patient
 
 Consulter un patient,Chercher des patients,Mettre à jour un patient,supprimer un patient
-
+![hospital](images/gestionpatient.png) 
 ### gestion de Medcin
 
 Consulter un Medcin,Chercher des Medcins,Mettre à jour un Medcin,supprimer un Medcin
-
+![hospital](images/crudmedcin.png) 
 ### gestion de Consultation
 
 Consulter un Consultation,Chercher des Consultations,Mettre à jour un Consultation,supprimer un Consultation
-
+![hospital](images/crudconsult.png) 
 ### gestion de RendezVous
-
+![hospital](images/crudRDV.png) 
 Consulter un RendezVous,Chercher des RendezVouss,Mettre à jour un RendezVous,supprimer un RendezVous
 
 #### Migrer de H2 Database vers MySQL
