@@ -145,19 +145,42 @@ Dans notre cas, nous avons créé une méthode start() qui retourne un objet de 
 ### gestion de patient
 
 Consulter un patient,Chercher des patients,Mettre à jour un patient,supprimer un patient
+
 ![hospital](images/gestionpatient.png) 
 ### gestion de Medcin
 
 Consulter un Medcin,Chercher des Medcins,Mettre à jour un Medcin,supprimer un Medcin
+
 ![hospital](images/crudmedcin.png) 
 ### gestion de Consultation
 
 Consulter un Consultation,Chercher des Consultations,Mettre à jour un Consultation,supprimer un Consultation
+
 ![hospital](images/crudconsult.png) 
+
 ### gestion de RendezVous
-![hospital](images/crudRDV.png) 
+
 Consulter un RendezVous,Chercher des RendezVouss,Mettre à jour un RendezVous,supprimer un RendezVous
+![hospital](images/crudRDV.png) 
 
 #### Migrer de H2 Database vers MySQL
+
+Pour migrer vers MySQL, nous avons installé XAMPP, puis ajouté le code suivant dans le fichier application.properties. 
+```
+spring.application.name=hospital
+server.port=8086
+spring.datasource.url=jdbc:mysql://localhost:3306/hospital_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+spring.datasource.username=root
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDBDialect
+
+```
+Voici une capture de la base de données sur le serveur XAMPP
+
+![hospital](images/sqldb.png) 
+
 #### Conclusion 
 
+Ce projet nous a permis de mettre en pratique les principaux concepts liés au développement d'une application web avec le framework Spring Boot, en combinant les modules Spring Data JPA, Spring Web et l'utilisation de bases de données relationnelles. Dans un premier temps, nous avons développé et testé l'application avec la base de données embarquée H2, ce qui nous a offert un environnement simple et rapide pour la phase de développement.
+
+Par la suite, nous avons effectué la migration vers MySQL, en installant XAMPP et en configurant la connexion dans le fichier application.properties. Cette étape nous a permis d'adapter l'application à un environnement plus proche de la production, tout en assurant la persistance réelle des données.
