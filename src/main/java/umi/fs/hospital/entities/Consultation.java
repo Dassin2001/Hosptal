@@ -16,5 +16,6 @@ public class Consultation {
     private Date dateConsultation;
     private String rapport;
     @OneToOne
-    private RandezVous randezVous;
+    private RendezVous rendezVous;
+
 }

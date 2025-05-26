@@ -11,17 +11,17 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RandezVous {
+public class RendezVous {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Temporal(TemporalType.DATE)
     private Date date;
-
+    @Enumerated(EnumType.STRING)
     private StatusRDV status ;
     @ManyToOne
     private Patient patient;
     @ManyToOne()
     private Medcin medcin;
-    @OneToOne(mappedBy = "randezVous")
+    @OneToOne(mappedBy = "rendezVous")
     private Consultation consultation;
 }
