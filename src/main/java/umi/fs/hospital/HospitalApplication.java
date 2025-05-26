@@ -59,15 +59,23 @@ public class HospitalApplication {
 
             // Créer un rendez-vous
             RendezVous rendezVous = new RendezVous();
+            rendezVous.setId(UUID.randomUUID().toString()); // Générer un ID unique de type String
             rendezVous.setDate(new Date());
             rendezVous.setStatus(StatusRDV.PENDING);
             rendezVous.setMedcin(medcin1);
             rendezVous.setPatient(patient);
+
             rendezVousRepository.save(rendezVous);
 
-            String rdvId = rendezVous.getId(); // Récupère l’ID string
+            String rdvId = rendezVous.getId();
 
             RendezVous rendezVous1 = rendezVousRepository.findById(rdvId).orElse(null);
+            if (rendezVous1 != null) {
+                System.out.println("Rendez-vous créé avec ID : " + rendezVous1.getId());
+            } else {
+                System.out.println("Échec de la création du rendez-vous.");
+            }
+
 
             //RendezVous rendezVous1 = rendezVousRepository.findById(1L).orElse(null);
 
@@ -166,17 +174,15 @@ public class HospitalApplication {
                     System.out.println("RDV ID: " + r.getId() + ", Patient: " + r.getPatient().getNom() + ", Status: " + r.getStatus())
             );
             System.out.println("\nMettre à jour un rendez-vous");
-            //RendezVous rdvToUpdate = rendezVousRepository.findById(1L).orElse(null);
 
             RendezVous rdvToUpdate = rendezVousRepository.findById(rdvId).orElse(null);
             if (rdvToUpdate != null) {
                 rdvToUpdate.setStatus(StatusRDV.DONE);
                 rendezVousRepository.save(rdvToUpdate);
-                rendezVous.setId(UUID.randomUUID().toString());
                 System.out.println("Rendez-vous mis à jour : " + rdvToUpdate.getStatus());
+            } else {
+                System.out.println("Aucun rendez-vous trouvé avec l'ID : " + rdvId);
             }
-
-
 
         };
 
